@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: f7938b890a5a78c438eaa4adfbb92e0a, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -8882,6 +8882,7 @@ MonoBehaviour:
   lap: 0
   checkPoint: -1
   nextPoint: 0
+  lastPoint: {fileID: 0}
 --- !u!1001 &1972990600
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10324,6 +10325,10 @@ PrefabInstance:
     - target: {fileID: 656027880803125526, guid: e04638f1d2f00144696d593027d1c02a, type: 3}
       propertyPath: m_TagString
       value: Car
+      objectReference: {fileID: 0}
+    - target: {fileID: 656027880953623920, guid: e04638f1d2f00144696d593027d1c02a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 656027880953623926, guid: e04638f1d2f00144696d593027d1c02a, type: 3}
       propertyPath: m_LocalPosition.x
