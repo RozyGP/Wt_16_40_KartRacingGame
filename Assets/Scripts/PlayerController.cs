@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (checkPointController.lap == RaceController.totalLaps + 1)
+            return;
+
         float acceleration = Input.GetAxis("Vertical");
         float steer = Input.GetAxis("Horizontal");
         float brake = Input.GetAxis("Jump");
@@ -35,7 +38,8 @@ public class PlayerController : MonoBehaviour
             drivingScript.rb.transform.position =
                 checkPointController.lastPoint.transform.position + Vector3.up * 2;
             drivingScript.rb.transform.rotation =
-                checkPointController.lastPoint.transform.rotation;
+                Quaternion.LookRotation(checkPointController.lastPoint.transform.right);
+                
 
             drivingScript.rb.gameObject.layer = 6; //UWAGA!
 

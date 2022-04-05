@@ -19,6 +19,8 @@ public class DrivingScript : MonoBehaviour
     float currentGearPerc;
     public AudioSource engineSound;
 
+    public GameObject cameraTarget;
+
     public void EngineSound()
     {
         float gears = 5;

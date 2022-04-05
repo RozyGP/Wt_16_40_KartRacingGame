@@ -19,6 +19,10 @@ public class RaceController : MonoBehaviour
 
     public GameObject endPanel;
 
+    public GameObject carPrefab;
+    public Transform[] spawnPoints;
+    public int playerCount;
+
     private void CountDown()
     {
         startText.gameObject.SetActive(true);
@@ -51,6 +55,20 @@ public class RaceController : MonoBehaviour
         startText.gameObject.SetActive(false);
 
         InvokeRepeating("CountDown", 3, 1);
+
+        for(int i=0;i<playerCount;i++)
+        {
+            GameObject car = Instantiate(carPrefab);
+            car.transform.position = spawnPoints[i].position;
+            car.transform.rotation = Quaternion.LookRotation(spawnPoints[i].right);
+            car.GetComponent<CarApperance>().playerNumber = i;
+
+            if (i == 0)
+            {
+                car.GetComponent<PlayerController>().enabled = true;
+                GameObject.FindObjectOfType<CameraController>().SetCameraProperties(car);
+            }
+        }
 
         GameObject[] cars = GameObject.FindGameObjectsWithTag("Car");
         carsController = new CheckPointController[cars.Length];

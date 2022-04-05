@@ -10,6 +10,8 @@ public class CarApperance : MonoBehaviour
     public TextMeshProUGUI nameText;
     public Renderer carRenderer;
 
+    public int playerNumber;
+
     private void Start()
     {
         nameText.text = playerName;
