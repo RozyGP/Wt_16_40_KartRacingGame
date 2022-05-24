@@ -21,6 +21,28 @@ public class DrivingScript : MonoBehaviour
 
     public GameObject cameraTarget;
 
+    public int nitroFuel = 3;
+    public GameObject nitroLights;
+
+    public void Nitro(bool on)
+    {
+        if(nitroFuel > 0 && on)
+        {
+            nitroFuel -= 1;
+            Boost(1e6f); //1*10^6 = 1 000 000
+            nitroLights.SetActive(true);
+        }
+        else
+        {
+            nitroLights.SetActive(false);
+        }
+    }
+
+    void Boost(float boostPower)
+    {
+        rb.AddForce(rb.gameObject.transform.forward * boostPower);
+    }
+
     public void EngineSound()
     {
         float gears = 5;

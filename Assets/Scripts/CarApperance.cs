@@ -12,29 +12,46 @@ public class CarApperance : MonoBehaviour
 
     public int playerNumber;
 
-    private void Start()
+    public Camera rearCamera;
+
+    int carRego;
+    bool regoSet = false;
+    public CheckPointController checkPointController;
+
+    private void LateUpdate()
     {
-        if(playerNumber == 0)
+        if(!regoSet)
         {
-            playerName = PlayerPrefs.GetString("PlayerName");
-            carColor = ColorCar.IntToColor(
-                PlayerPrefs.GetInt("Red"),
-                PlayerPrefs.GetInt("Green"),
-                PlayerPrefs.GetInt("Blue")
-                );
-        }
-        else
-        {
-            playerName = "Random " + playerNumber;
-            carColor = new Color(
-                Random.Range(0f, 1f), 
-                Random.Range(0f, 1f), 
-                Random.Range(0f, 1f)
-                );
+            carRego = Leaderboard.RegisterCar(playerName);
+            regoSet = true;
+            return;
         }
 
+        Leaderboard.SetPosition(carRego,
+            checkPointController.lap,
+            checkPointController.checkPoint);
+    }
+
+    public void SetNameAndColor(string name, Color color)
+    {
+        playerName = name;
+        nameText.text = name;
+        carRenderer.material.color = color;
+        nameText.color = color;
+    }
+
+    public void SetLocalPlayer()
+    {
+        FindObjectOfType<CameraController>().SetCameraProperties(this.gameObject);
+        playerName = PlayerPrefs.GetString("PlayerName");
+        carColor = ColorCar.IntToColor(PlayerPrefs.GetInt("Red"),
+            PlayerPrefs.GetInt("Green"),
+            PlayerPrefs.GetInt("Blue"));
         nameText.text = playerName;
         carRenderer.material.color = carColor;
         nameText.color = carColor;
+        RenderTexture renderTexture = new RenderTexture(1024, 1024, 0);
+        rearCamera.targetTexture = renderTexture;
+        FindObjectOfType<RaceController>().SetMirror(rearCamera);
     }
 }
